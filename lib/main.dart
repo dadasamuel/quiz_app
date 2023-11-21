@@ -12,20 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('QUIZZLER',
-          style: TextStyle(
-            color:Colors.white,
-            fontWeight: FontWeight.bold
-          ),
+          title: const Text(
+            'QUIZZLER',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
-        body: quizPage(),
+        body: const QuizPage(),
       ),
     );
   }

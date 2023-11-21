@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/quizBrain.dart';
 
-class quizPage extends StatefulWidget {
-  const quizPage({super.key});
+class QuizPage extends StatefulWidget {
+  const QuizPage({super.key});
 
   @override
-  State<quizPage> createState() => _quizPageState();
+  State<QuizPage> createState() => _QuizPageState();
 }
 
-class _quizPageState extends State<quizPage> {
+class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
   // List<String> questions = [
   //   'You can lead a cow down stairs but not up stairs.',
@@ -18,6 +18,7 @@ class _quizPageState extends State<quizPage> {
   // List<bool> answers = [false, true, true];
 
   QuizBrain quizBrain = QuizBrain();
+ 
 
   @override
   Widget build(BuildContext context) {
