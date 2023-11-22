@@ -11,6 +11,8 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
+  int correctScore = 0;
+  int wrongScore = 0;
   // List<String> questions = [
   //   'You can lead a cow down stairs but not up stairs.',
   //   'Approximately one quarter of human bones are in the feet.',
@@ -26,8 +28,18 @@ class _QuizPageState extends State<QuizPage> {
         Alert(
           context: context,
           type: AlertType.success,
+          closeFunction: () {
+            setState(() {
+              correctScore = 0;
+              wrongScore = 0;
+              quizBrain.reset();
+              scoreKeeper.clear();
+              Navigator.pop(context);
+            });
+          },
           title: "QUIZZLER",
-          desc: "You got score questions correctly",
+          desc:
+              "You got $correctScore questions correctly and missed $wrongScore",
           buttons: [
             DialogButton(
               child: Text(
@@ -36,6 +48,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
+                  correctScore = 0;
+                  wrongScore = 0;
                   quizBrain.reset();
                   scoreKeeper.clear();
                   Navigator.pop(context);
@@ -77,6 +91,7 @@ class _QuizPageState extends State<QuizPage> {
                   bool correctAnswer = quizBrain.getCorrectAnswer();
                   setState(() {
                     if (correctAnswer == true) {
+                      correctScore++;
                       scoreKeeper.add(
                         Icon(
                           Icons.check,
@@ -84,6 +99,7 @@ class _QuizPageState extends State<QuizPage> {
                         ),
                       );
                     } else {
+                      wrongScore++;
                       scoreKeeper.add(Icon(
                         Icons.close,
                         color: Colors.red,
@@ -109,6 +125,7 @@ class _QuizPageState extends State<QuizPage> {
                   bool correctAnswer = quizBrain.getCorrectAnswer();
                   setState(() {
                     if (correctAnswer == false) {
+                      correctScore++;
                       scoreKeeper.add(
                         Icon(
                           Icons.check,
@@ -116,6 +133,7 @@ class _QuizPageState extends State<QuizPage> {
                         ),
                       );
                     } else {
+                      wrongScore++;
                       scoreKeeper.add(Icon(
                         Icons.close,
                         color: Colors.red,
