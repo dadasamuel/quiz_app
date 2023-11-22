@@ -20,31 +20,34 @@ class _QuizPageState extends State<QuizPage> {
 
   QuizBrain quizBrain = QuizBrain();
 
-  setState(VoidCallback fn) {
-    if (quizBrain.isFinished() == true) {
-      Alert(
-        context: context,
-        type: AlertType.success,
-        title: "QUIZZLER",
-        desc: "You got score questions correctly",
-        buttons: [
-          DialogButton(
-            child: Text(
-              "RE-START",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            onPressed: () {
-              setState(() {
-                quizBrain.reset();
-                scoreKeeper=[];
-              });
-            },
-            width: 120,
-          )
-        ],
-      ).show();
-    }
-  } else {}
+  endOfQuestion() {
+    setState(() {
+      if (quizBrain.isFinished() == true) {
+        Alert(
+          context: context,
+          type: AlertType.success,
+          title: "QUIZZLER",
+          desc: "You got score questions correctly",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "RE-START",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                setState(() {
+                  quizBrain.reset();
+                  scoreKeeper.clear();
+                  Navigator.pop(context);
+                });
+              },
+              width: 120,
+            )
+          ],
+        ).show();
+      } else {}
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +89,7 @@ class _QuizPageState extends State<QuizPage> {
                         color: Colors.red,
                       ));
                     }
+                    endOfQuestion();
                     quizBrain.nextQuestion();
                   });
                 },
@@ -117,6 +121,7 @@ class _QuizPageState extends State<QuizPage> {
                         color: Colors.red,
                       ));
                     }
+                    endOfQuestion();
                     quizBrain.nextQuestion();
                   });
                 },
