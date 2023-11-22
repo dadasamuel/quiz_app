@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/quizBrain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -18,7 +19,32 @@ class _QuizPageState extends State<QuizPage> {
   // List<bool> answers = [false, true, true];
 
   QuizBrain quizBrain = QuizBrain();
- 
+
+  setState(VoidCallback fn) {
+    if (quizBrain.isFinished() == true) {
+      Alert(
+        context: context,
+        type: AlertType.success,
+        title: "QUIZZLER",
+        desc: "You got score questions correctly",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "RE-START",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+              setState(() {
+                quizBrain.reset();
+                scoreKeeper=[];
+              });
+            },
+            width: 120,
+          )
+        ],
+      ).show();
+    }
+  } else {}
 
   @override
   Widget build(BuildContext context) {
